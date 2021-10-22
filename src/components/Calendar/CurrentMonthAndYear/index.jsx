@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { format, add, addDays } from "date-fns";
+import { format } from "date-fns";
 import styles from "./currentMonthAndYear.module.scss";
+import { useContext } from "react";
+import { DateContext } from "../../../contexts";
 
-function CurrentMonthAndYear() {
-  const [month, setMonth] = useState(new Date());
-  const [year, setYear] = useState(new Date());
-
+function CurrentMonthAndYear(props) {
+  const [currentDay] = useContext(DateContext);
   return (
     <h2 className={styles.currentMonthAndYear}>
-      {format(month, "MMMM ")} {format(year, "yyyy")}
+      {format(currentDay, "MMMM ")} {format(currentDay, "yyyy")}
     </h2>
   );
 }
