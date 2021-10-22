@@ -1,11 +1,20 @@
-import React from "react";
-import { useState } from "react";
-import { format, weekStartsOn } from "date-fns";
+import React, { useContext } from "react";
+import { DateContext } from "../../../contexts";
+import { format, startOfWeek, addDays } from "date-fns";
 import styles from "./daysWeek.module.scss";
 
-function DaysWeek() {
-  const [dayWeek, setDayWeek] = useState([]);
+function DaysWeek(props) {
+  const [currentDay] = useContext(DateContext);
 
-  return <div className={styles.dayWeek}></div>;
+  const startingDate = startOfWeek(currentDay);
+  const daysArr = new Array(7).fill(null).map((_, i) => {
+    return (
+      <div key={i} className={styles.dayWeek}>
+        {format(addDays(startingDate, i), "EEEEE")}
+      </div>
+    );
+  });
+
+  return <div className={styles.daysWeek}>{daysArr}</div>;
 }
 export default DaysWeek;
