@@ -1,16 +1,15 @@
-import React from "react";
-
-import cx from "classnames";
+import React, { useContext } from "react";
+import { format } from "date-fns";
 import styles from "./SectionCurrentDayAndDayWeek.module.scss";
-import CurrentDayWeek from "../CurrentDayWeek";
-import CurrentDate from "../CurrentDate";
+import { DateContext } from "../../../contexts";
 
-function SectionCurrentDayAndDayWeek() {
+function SectionCurrentDayAndDayWeek(props) {
+  const [currentDay] = useContext(DateContext);
   return (
-    <section className={styles.flexContainerSection}>
-      <CurrentDayWeek />
-      <CurrentDate />
-    </section>
+    <div className={`${styles.flexContainer} ${styles.ContainerSection}`}>
+      <p className={styles.dayWeek}>{format(currentDay, "EEEE")}</p>
+      <p className={styles.date}>{format(currentDay, "d")}</p>
+    </div>
   );
 }
 export default SectionCurrentDayAndDayWeek;
